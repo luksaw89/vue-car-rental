@@ -1,17 +1,6 @@
 <template>
   <div id="app">
-    <div class="addSection">
-      <h3>Dodaj samochód</h3>
-      <div>
-        <label>Brand</label>
-        <input type="text" v-model="brand"/>
-      </div>
-      <div>
-        <label>Model</label>
-        <input type="text" v-model="model"/>
-      </div>
-      <button @click="addCar">Zatwierdz</button>
-    </div>
+    <add-car @submit="addCar"/>
     <div>
       <label>Filter</label>
       <input type="text" v-model="filter"/>
@@ -19,35 +8,26 @@
     <div>
       <button @click="removeCar">Usun</button>
     </div>
-    <table>
-      <tr>
-        <th>brand</th>
-        <th>model</th>
-      </tr>
-      <tbody>
-        <tr
-          v-for="car in filteredCars" 
-          :key="car.id"
-          @click="selectCar(car.id)"
-          :class="{selected: selectedCarId == car.id}"
-        >
-          <td>{{ car.brand }}</td>
-          <td>{{ car.model }}</td>
-          <td>{{ (new Date(car.id)).toLocaleString() }}</td>
-        </tr>
-      </tbody>
-    </table>
+    <cars-table 
+      :cars="filteredCars"
+      :selected-car-id="selectedCarId"
+      @select="selectCar"
+    />
   </div>
 </template>
 
 <script>
+import AddCar from './components/AddCar';
+import CarsTable from './components/CarsTable';
 
 export default {
   name: 'App',
+  components: {
+    AddCar,
+    CarsTable,
+  },
   data() {
     return {
-      brand: '',
-      model: '',
       filter: '',
       cars: [],
       selectedCarId: null,
@@ -65,23 +45,8 @@ export default {
     }
   },
   methods: {
-    addCar() {
-      const newCar = {
-        id: Date.now(),
-        brand: this.brand,
-        model: this.model
-      };
-      if (this.brand=="") {
-        alert("Marka nie moze byc pusta");
-        return;
-      }
-      if (this.model=="") {
-        alert("Model nie moze byc pusty");
-        return;
-      }
-      this.cars.push(newCar);
-      this.brand='';
-      this.model='';
+    addCar(car) {
+      this.cars.push(car);
       localStorage.setItem('cars', JSON.stringify(this.cars));
     },
     selectCar(carId) {
@@ -91,6 +56,7 @@ export default {
       this.cars = this.cars.filter((car) => {
         return car.id != this.selectedCarId;
       });
+      localStorage.setItem('cars', JSON.stringify(this.cars));
     }
   }
 }
