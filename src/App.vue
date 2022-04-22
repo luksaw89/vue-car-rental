@@ -1,18 +1,25 @@
 <template>
-  <div id="app">
-    <add-car @submit="addCar"/>
-    <div>
-      <label>Filter</label>
-      <input type="text" v-model="filter"/>
+  <div class="main">
+    <div id="app">
+      <add-car 
+        :is-open="isOpen"
+        @submit="addCar"
+        @close="hideModal"
+      />
+      <div>
+        <label>Filter</label>
+        <input type="text" v-model="filter"/>
+      </div>
+      <div>
+        <button @click="removeCar">Delete</button>
+        <button @click="showModal">Add Car</button>
+      </div>
+      <cars-table 
+        :cars="filteredCars"
+        :selected-car-id="selectedCarId"
+        @select="selectCar"
+      />
     </div>
-    <div>
-      <button @click="removeCar">Usun</button>
-    </div>
-    <cars-table 
-      :cars="filteredCars"
-      :selected-car-id="selectedCarId"
-      @select="selectCar"
-    />
   </div>
 </template>
 
@@ -31,6 +38,7 @@ export default {
       filter: '',
       cars: [],
       selectedCarId: null,
+      isOpen: false,
     }
   },
   mounted() {
@@ -57,6 +65,12 @@ export default {
         return car.id != this.selectedCarId;
       });
       localStorage.setItem('cars', JSON.stringify(this.cars));
+    },
+    showModal() {
+      this.isOpen=true;
+    },
+    hideModal() {
+      this.isOpen=false;    
     }
   }
 }
@@ -65,5 +79,16 @@ export default {
 <style>
   .selected {
     background-color:blue;
+  }
+  body {
+    background-color: #f8f8f8;
+  }
+  .main {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #ffffff;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    padding: 20px;
   }
 </style>
