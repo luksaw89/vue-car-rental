@@ -1,85 +1,39 @@
 <template>
   <div class="main">
-    <div id="app">
-      <add-car 
-        :is-open="isOpen"
-        @submit="addCar"
-        @close="hideModal"
-      />
-      <div>
-        <label>Filter</label>
-        <input type="text" v-model="filter"/>
-      </div>
-      <div>
-        <button @click="removeCar">Delete</button>
-        <button @click="showModal">Add Car</button>
-      </div>
-      <cars-table 
-        :cars="filteredCars"
-        :selected-car-id="selectedCarId"
-        @select="selectCar"
-      />
-    </div>
+    <button @click="goToCarPage">Cars</button>
+    <button @click="goToClientPage">Client</button>
+    <car-page v-if="page=='cars'"/>
+    <client-page v-if="page=='clients'"/>
   </div>
 </template>
 
 <script>
-import AddCar from './components/AddCar';
-import CarsTable from './components/CarsTable';
+import CarPage from './components/CarPage';
+import ClientPage from './components/ClientPage';
 
 export default {
   name: 'App',
   components: {
-    AddCar,
-    CarsTable,
+    CarPage,
+    ClientPage,
   },
   data() {
     return {
-      filter: '',
-      cars: [],
-      selectedCarId: null,
-      isOpen: false,
-    }
-  },
-  mounted() {
-    this.cars = JSON.parse(localStorage.getItem('cars')) || [];
-  },
-  computed: {
-    filteredCars() {
-      if (this.filter=='') {
-       return [...this.cars];
-      }
-      return this.cars.filter((item)=>item.brand.includes(this.filter) || item.model.includes(this.filter));
-    }
+      page: 'cars',
+    };
   },
   methods: {
-    addCar(car) {
-      this.cars.push(car);
-      localStorage.setItem('cars', JSON.stringify(this.cars));
+    goToCarPage() {
+      this.page='cars';
     },
-    selectCar(carId) {
-      this.selectedCarId = carId;
-    },
-    removeCar() {
-      this.cars = this.cars.filter((car) => {
-        return car.id != this.selectedCarId;
-      });
-      localStorage.setItem('cars', JSON.stringify(this.cars));
-    },
-    showModal() {
-      this.isOpen=true;
-    },
-    hideModal() {
-      this.isOpen=false;    
+    goToClientPage() {
+      this.page='clients';
     }
   }
 }
 </script>
 
 <style>
-  .selected {
-    background-color:blue;
-  }
   body {
     background-color: #f8f8f8;
   }

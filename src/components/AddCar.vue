@@ -1,6 +1,6 @@
 <template>
   <div 
-    v-if="isOpen"
+    v-if="value"
     class="backdrop"
   >
     <div class="modal">
@@ -24,7 +24,7 @@
 <script>
   export default {
     name: 'AddCar',
-    props: ['isOpen'],
+    props: ['value'],
     data() {
       return {
         brand: '',
@@ -51,7 +51,7 @@
         this.close();
       },
       close() {
-        this.$emit('close');
+        this.$emit('input', false);
         this.clear();
       },
       clear() {
