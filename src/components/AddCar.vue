@@ -13,6 +13,14 @@
         <label>Model</label>
         <input type="text" v-model="model"/>
       </div>
+      <div class="field">
+        <label>Plate number</label>
+        <input type="text" v-model="plateNo"/>
+      </div>  
+      <div class="field">
+        <label>Price</label>
+        <input type="number" v-model="price"/>
+      </div>  
       <div class="buttons">
         <button @click="addCar">Save</button>
         <button @click="close">Cancel</button>
@@ -29,6 +37,8 @@
       return {
         brand: '',
         model: '',
+        plateNo: '',
+        price: '',
       }
     },
     methods: {
@@ -36,14 +46,24 @@
         const newCar = {
           id: Date.now(),
           brand: this.brand,
-          model: this.model
+          model: this.model,
+          plateNo: this.plateNo,
+          price: this.price,
         };
         if (this.brand=="") {
-          alert("Marka nie moze byc pusta");
+          alert("Brand cannot be empty");
           return;
         }
         if (this.model=="") {
-          alert("Model nie moze byc pusty");
+          alert("Model cannot be empty");
+          return;
+        }
+        if (this.plateNo=="") {
+          alert("Plate number cannot be empty");
+          return;
+        }
+        if (this.price=="") {
+          alert("Price cannot be empty");
           return;
         }
         this.clear();
@@ -57,6 +77,8 @@
       clear() {
         this.brand='';
         this.model='';
+        this.plateNo='';
+        this.price='';
       }
     }
   }

@@ -1,8 +1,11 @@
 <template>
   <table>
     <tr>
-      <th>brand</th>
-      <th>model</th>
+      <th>Brand</th>
+      <th>Model</th>
+      <th>PlateNo</th>
+      <th>Price</th>
+      <th>Added</th>
     </tr>
     <tbody>
       <tr
@@ -13,6 +16,8 @@
       >
         <td>{{ car.brand }}</td>
         <td>{{ car.model }}</td>
+        <td>{{ car.plateNo }}</td>
+        <td>{{ car.price }}</td>
         <td>{{ (new Date(car.id)).toLocaleString() }}</td>
       </tr>
     </tbody>
