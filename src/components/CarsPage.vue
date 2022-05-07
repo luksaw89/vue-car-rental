@@ -68,7 +68,9 @@ export default {
       this.isOpen=true;
     },
     openCarDetails() {
-      this.$router.push({path: '/cars/' + this.selectedCarId});
+      if(this.selectedCarId) {
+        this.$router.push({path: '/cars/' + this.selectedCarId});  
+      }
     }
   }
 }
