@@ -5,7 +5,6 @@
       <th>Model</th>
       <th>PlateNo</th>
       <th>Price</th>
-      <th>Added</th>
     </tr>
     <tbody>
       <tr
@@ -18,7 +17,6 @@
         <td>{{ car.model }}</td>
         <td>{{ car.plateNo }}</td>
         <td>{{ car.price }}</td>
-        <td>{{ (new Date(car.id)).toLocaleString() }}</td>
       </tr>
     </tbody>
   </table>

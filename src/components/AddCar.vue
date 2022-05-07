@@ -44,7 +44,6 @@
     methods: {
       addCar() {
         const newCar = {
-          id: Date.now(),
           brand: this.brand,
           model: this.model,
           plateNo: this.plateNo,

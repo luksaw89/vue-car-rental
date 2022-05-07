@@ -24,6 +24,7 @@
 <script>
 import AddCar from './AddCar';
 import CarsTable from './CarsTable';
+import { addCar, fetchCars } from '../server';
 
 export default {
   name: 'CarsPage',
@@ -40,20 +41,24 @@ export default {
     }
   },
   mounted() {
-    this.cars = JSON.parse(localStorage.getItem('cars')) || [];
+    this.fetchData();
   },
   computed: {
     filteredCars() {
       if (this.filter=='') {
-       return [...this.cars];
+        return [...this.cars];
       }
       return this.cars.filter((item)=>item.brand.includes(this.filter) || item.model.includes(this.filter));
     }
   },
   methods: {
     addCar(car) {
-      this.cars.push(car);
-      localStorage.setItem('cars', JSON.stringify(this.cars));
+      addCar(car)
+        .then(() => this.fetchData())
+    },
+    fetchData() {
+      fetchCars()
+        .then((data) => this.cars = data);
     },
     selectCar(carId) {
       this.selectedCarId = carId;
