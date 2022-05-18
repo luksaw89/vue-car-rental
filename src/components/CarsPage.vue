@@ -9,9 +9,9 @@
       <input type="text" v-model="filter"/>
     </div>
     <div>
-      <button @click="openCarDetails">Open</button>
-      <button @click="removeCar">Delete</button>
-      <button @click="showModal">Add Car</button>
+      <b-button @click="openCarDetails" class="m-1">Open</b-button>
+      <b-button @click="removeCar" class="m-1 bg-danger">Delete</b-button>
+      <b-button @click="showModal" class="m-1">Add Car</b-button>
     </div>
     <cars-table 
       :cars="filteredCars"
@@ -52,13 +52,12 @@ export default {
     }
   },
   methods: {
-    addCar(car) {
-      addCar(car)
-        .then(() => this.fetchData())
+    async addCar(car) {
+      await addCar(car);
+      await this.fetchData();
     },
-    fetchData() {
-      fetchCars()
-        .then((data) => this.cars = data);
+    async fetchData() {
+      this.cars = await fetchCars();
     },
     selectCar(carId) {
       this.selectedCarId = carId;

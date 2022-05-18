@@ -83,23 +83,7 @@
   }
 </script>
 
-<style scoped>
-  h3 {
-    margin-top: 0px;
-  }
-  .field {
-    margin-top: 10px;
-  }
-  label {
-    display: inline-block;
-    width: 50px; 
-  }
-  .buttons {
-    margin-top: 20px;
-  }
-  button {
-    margin-right: 5px;
-  }
+<style scoped lang="scss">
   .backdrop {
     position: absolute;
     left: 0;
@@ -107,15 +91,37 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  .modal {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 30%;
-    padding: 20px;
-    max-width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
+
+    .modal {
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 200px;
+      padding: 20px;
+      max-width: 300px;
+      background-color: #fff;
+      border: 1px solid #ccc; 
+      border-radius: 5px;
+
+      h3 {
+        margin-top: 0px;
+      }
+
+      .field {
+        margin-top: 10px;
+      }
+
+      label {
+        display: inline-block;
+        width: 50px; 
+      }
+
+      .buttons {
+        margin-top: 20px;
+
+        button {
+          margin-right: 5px;
+        }
+      }
+    }
   }
 </style>

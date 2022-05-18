@@ -1,5 +1,5 @@
 <template>
-  <table>
+  <!-- <table>
     <tr>
       <th>Brand</th>
       <th>Model</th>
@@ -19,7 +19,8 @@
         <td>{{ car.price }}</td>
       </tr>
     </tbody>
-  </table>
+  </table> -->
+  <b-table striped hover :items="cars" :fields="fields"></b-table>
 </template>
 
 <script>
@@ -30,6 +31,11 @@ export default {
     'cars',
     'selectedCarId',
   ],
+  data() {
+    return {
+      fields: ['brand', 'model', 'plateNo', 'price']
+    }
+  }
   // beforeCreate() {
   //   console.log('beforeCreate');
   // },

@@ -9,8 +9,6 @@
       <button @click="showModalAdd">ADD</button>
       <button @click="showModalEdit">EDIT</button>
       <button @click="removeClient">REMOVE</button>
-      <!-- <button @click="showCorporate">Show</button> -->
-      <!-- <button @click="isDiscount">Clients with discounts</button>    -->
       <div class="filtering">
         <input type="text" placeholder="Filter by name" v-model="filter"/>
       </div>
@@ -26,6 +24,7 @@
 <script>
 import AddClient from './AddClient';
 import ClientsTable from './ClientsTable';
+import { fetchClients, addClient, editClient } from '../server';
 
 export default {
   name: 'ClientsPage',
@@ -43,7 +42,7 @@ export default {
     }
   },
   mounted() {
-    this.clients = JSON.parse(localStorage.getItem('clients')) || [];
+    this.fetchData();
   },
   computed: {
     filteredClients() {
@@ -54,17 +53,16 @@ export default {
     }
   },
   methods: {
-    addClient(client) {
-      console.log(client, this.clientToEdit);
+    async addClient(client) {
       if(!this.clientToEdit) {
-        this.clients.push(client);       
+        await addClient(client);
       } else {
-        this.clients = [
-          ...this.clients.filter((item) => item.id !== client.id),
-          client,
-        ];
+        await editClient(client);
       }
-      localStorage.setItem('clients', JSON.stringify(this.clients));
+      await this.fetchData();
+    },
+    async fetchData() {
+      this.clients = await fetchClients();
     },
     selectClient(clientId) {
       this.selectedClientId = clientId;
@@ -87,7 +85,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
   button {
     align-items: center;
     cursor: pointer;

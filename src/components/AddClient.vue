@@ -110,14 +110,21 @@
   }
 </script>
 
-<style scoped>
+<style scoped lang="scss">
+  .modal {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10%;
+    padding: 20px 30px;
+    max-width: 300px;
+    background-color: #fff;
+    border: 1px solid #ccc; 
+    border-radius: 5px;
+  }
   h3 {
-    font-family: sans-serif;
-    box-sizing: border-box;
     margin-top: 0px;
   }
   .field {
-    font-family: sans-serif;
     width: 300px;
     margin-top: 10px;
     padding: 2px;
@@ -146,15 +153,5 @@
     right: 0;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
-  }
-  .modal {
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 10%;
-    padding: 20px 30px;
-    max-width: 300px;
-    background-color: #fff;
-    border: 1px solid #ccc; 
-    border-radius: 5px;
   }
 </style>
