@@ -20,7 +20,7 @@
       </tr>
     </tbody>
   </table> -->
-  <b-table striped hover :items="cars" :fields="fields"></b-table>
+  <b-table striped hover :items="cars" :fields="fields" @row-selected="() => {}"></b-table>
 </template>
 
 <script>

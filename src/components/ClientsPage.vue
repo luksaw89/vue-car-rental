@@ -5,11 +5,11 @@
       :client="clientToEdit"
       @submit="addClient"
     />
-    <div class="btn-back">
-      <button @click="showModalAdd">ADD</button>
-      <button @click="showModalEdit">EDIT</button>
-      <button @click="removeClient">REMOVE</button>
-      <div class="filtering">
+    <div class="d-flex">
+      <button type="button" class="m-1 btn btn-outline-primary" @click="showModalAdd">ADD</button>
+      <button type="button" class="m-1 btn btn-outline-secondary"  @click="showModalEdit">EDIT</button>
+      <button type="button" class="m-1 btn btn-outline-danger" @click="removeClient">REMOVE</button>
+      <div class="ml-auto p-2">
         <input type="text" placeholder="Filter by name" v-model="filter"/>
       </div>
     </div>
@@ -80,36 +80,22 @@ export default {
     showModalEdit() {
       this.isOpen=true;
       this.clientToEdit = this.clients.find((item) => item.id == this.selectedClientId);
-    }
+    },
+    // bubblesort(array) {
+    //   for (let i = 0; i < array.length - 1; i++) {
+    //     for (let j=0; j < array.lenght - 1 - i; j++) {
+    //       if (array[j] > array[j+1]) {
+    //         [array[j], array[j+1] = [array[j+1], array[j]]]
+    //       }
+    //     }
+    //   }
+    //   return array;
+    // }
+
   }
 }
 </script>
 
-<style scoped lang="scss">
-  button {
-    align-items: center;
-    cursor: pointer;
-    border-radius: 50px;
-    font-size: 12px;
-    font-weight: bold;
-    padding-inline: 25px;
-    padding-block: 10px;
-    margin-top: 20px;
-    margin-left: 5px;
-  }
-  .btn-back {
-    display: flexbox; 
-  }
-  button:hover {
-    color: #fafafa;
-    background-color:#848DA1;
-  }
-  button:active {
-    color: #fafafa;
-    background-color:#1F3974;
-  }
-  .filtering {
-    display: inline-block;
-    margin-left: 30px;
-  }
+<style>
+
 </style>
